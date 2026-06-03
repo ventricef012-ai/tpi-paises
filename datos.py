@@ -11,6 +11,9 @@ CAMPOS = ["nombre", "poblacion", "superficie", "continente"]
 
 
 def cargar_paises(ruta=ARCHIVO_CSV):
+    datos_paises=[]
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        lector = csv.DictReader(archivo)
     """
     Lee el archivo CSV y devuelve una lista de diccionarios.
     Cada diccionario representa un país con las claves:
