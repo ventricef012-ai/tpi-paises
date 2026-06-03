@@ -12,22 +12,24 @@ CAMPOS = ["nombre", "poblacion", "superficie", "continente"]
 
 def cargar_paises(ruta=ARCHIVO_CSV):
     datos_paises=[]
-    with open(ruta, "r", encoding="utf-8") as archivo:
-        lector = csv.DictReader(archivo)
-    """
-    Lee el archivo CSV y devuelve una lista de diccionarios.
-    Cada diccionario representa un país con las claves:
-    nombre (str), poblacion (int), superficie (int), continente (str).
-
-    Maneja errores de archivo no encontrado, formato incorrecto
-    y conversión de tipos.
-
-    Retorna:
-        list[dict]: lista de países cargados.
-                    Lista vacía si el archivo no existe o está vacío.
-    """
-    # TODO: implementar
-    pass
+    try:
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                pais = {
+                    "nombre": fila["nombre"],
+                    "poblacion": int(fila["poblacion"]),
+                    "superficie": int(fila["superficie"]),
+                    "continente": fila["continente"]
+                    }
+                datos_paises.append(pais)
+    except FileNotFoundError:
+        print("El archivo que intenta abrir no existe")
+        return []
+    except ValueError:
+        print("El csv tiene valores erroneos")
+        return []
+    return datos_paises
 
 
 def guardar_paises(paises, ruta=ARCHIVO_CSV):
