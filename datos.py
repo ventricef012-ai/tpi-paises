@@ -11,11 +11,15 @@ CAMPOS = ["nombre", "poblacion", "superficie", "continente"]
 
 
 def cargar_paises(ruta=ARCHIVO_CSV):
+    """Lee el CSV y devuelve una lista de diccionarios (un país por dict).
+    Devuelve lista vacía si el archivo no existe o tiene datos mal formados."""
     datos_paises=[]
     try:
         with open(ruta, "r", encoding="utf-8") as archivo:
+            # DictReader usa la primera fila (encabezado) como claves del dict
             lector = csv.DictReader(archivo)
             for fila in lector:
+                # El CSV trae todo como texto: convertimos los números a int
                 pais = {
                     "nombre": fila["nombre"],
                     "poblacion": int(fila["poblacion"]),
@@ -26,23 +30,22 @@ def cargar_paises(ruta=ARCHIVO_CSV):
     except FileNotFoundError:
         print("El archivo que intenta abrir no existe")
         return []
-    except ValueError:
-        print("El csv tiene valores erroneos")
+    except ValueError as e:
+        print(f"El CSV tiene valores numéricos mal cargados. Detalle: {e}")
         return []
     return datos_paises
 
 
 def guardar_paises(paises, ruta=ARCHIVO_CSV):
-    """
-    Escribe la lista de países en el archivo CSV.
-    Sobreescribe el contenido existente.
-
-    Parámetros:
-        paises (list[dict]): lista de países a guardar.
-        ruta (str): ruta del archivo CSV.
-    """
-    # TODO: implementar
-    pass
+    """Escribe la lista de países en el archivo CSV. Sobreescribe el contenido."""
+    # newline="" evita filas vacías entre registros (importante en Windows)
+    try:
+        with open(ruta,"w",newline="",encoding="utf-8") as archivo:
+            escritor_dict = csv.DictWriter(archivo, fieldnames=CAMPOS)
+            escritor_dict.writeheader()
+            escritor_dict.writerows(paises)
+    except PermissionError as e:
+        print(f"No se pudo guardar el archivo. Detalle: {e}")
 
 
 def agregar_pais(paises):
