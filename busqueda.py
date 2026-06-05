@@ -3,21 +3,32 @@
 # Rama: feature/busqueda-y-ordenamiento
 # =============================================================================
 
+from utils import mostrar_lista_paises                                       # Importa función creada en utils.py
 
+# Función para buscar países por coincidencia parcial o total
+# Parámetro: paises(list) es una lista de diccionarios de países
 def buscar_por_nombre(paises):
-    """
-    Solicita un nombre o fragmento al usuario y muestra todos los países
-    cuyo nombre lo contenga (sin distinguir mayúsculas/minúsculas).
-    Muestra un mensaje claro si no hay resultados.
+    termino = input("Ingresá el nombre del país a buscar (coincidencia parcial o total): ").strip()
 
-    Parámetros:
-        paises (list[dict]): lista de países.
+    if not termino:                                                          # Valida que el usuario no deje el campo en blanco 
+        print("El campo no puede estar vacío.")
+        return
+    
+    termino_lower = termino.lower()                                          # .lower() para convertir el string ingresado a minúsculas
+    resultados = []                                                          # Guarda las coincidencias en una lista y las pasa a la función mostrar_lista_paises()
+    
+    for pais in paises:
+        if termino_lower in pais["nombre"].lower():
+            resultados.append(pais)                                          # Agrega el resultado al final de la lista
 
-    Retorna:
-        list[dict]: lista de países que coinciden (puede estar vacía).
-    """
-    # TODO: implementar
-    pass
+    if not resultados:                                                       # Si no encuentra coincidencias imprime mensaje de error
+        print(f'No se encontraron países que coincidan con "{termino}"')
+    else:                                                                    # Si encuentra coincidencias las muestra por pantalla con llamado a funcion mostrar_lista_paises()
+        mostrar_lista_paises(resultados)
+
+
+
+
 
 
 def filtrar_por_continente(paises):
