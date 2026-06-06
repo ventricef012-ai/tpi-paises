@@ -53,7 +53,10 @@ def agregar_pais(paises):
         nombre_pais = input("Ingrese el nombre del pais: ").strip()
         if not nombre_pais:
             raise ValueError("El nombre no puede estar vacío")
-        
+        for pais_existente in paises:
+            if nombre_pais.lower() == pais_existente["nombre"].lower():
+                raise ValueError(f"El país '{nombre_pais}' ya existe en la lista")
+            
         poblacion_pais = int(input("Ingrese la poblacion del pais: ").strip())
         if poblacion_pais <= 0:
             raise ValueError("No se puede ingresar datos negativos o iguales a 0")
