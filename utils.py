@@ -3,17 +3,15 @@
 # Responsable: ambos integrantes (acordar formato antes de implementar)
 # =============================================================================
 
-
+# Función para mostrar los datos del país con formato legible
+# Parámetro: pais(dict) es un diccionario con claves de nombre, población, superficie y continente. 
 def mostrar_pais(pais):
+    print(f"  Nombre:      {pais['nombre']}")
+    print(f"  Continente:  {pais['continente']}")
+    print(f"  Población:   {pais['poblacion']}".replace(",", "."))       # Función replace para reemplazar las comas por puntos al ejecutar
+    print(f"  Superficie:  {pais['superficie']} km²".replace(",", "."))
+    print("  " + "-" * 24)
 
-    #Muestra los datos de un país (un diccionario) en formato legible.
-    # ':<10' alinea las etiquetas a 10 caracteres para que los ':' queden parejos
-    # ':,' agrega el separador de miles a los números
-
-    print(f"{'Nombre':<10}: {pais['nombre']}")
-    print(f"{'Población':<10}: {pais['poblacion']:,}")
-    print(f"{'Superficie':<10}: {pais['superficie']:,} km²")
-    print(f"{'Continente':<10}: {pais['continente']}")
 
 
 def mostrar_lista_paises(paises, titulo="Resultados"):
