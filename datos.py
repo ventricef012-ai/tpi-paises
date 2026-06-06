@@ -49,6 +49,36 @@ def guardar_paises(paises, ruta=ARCHIVO_CSV):
 
 
 def agregar_pais(paises):
+    try:
+        nombre_pais = input("Ingrese el nombre del pais: ").strip()
+        if not nombre_pais:
+            raise ValueError("El nombre no puede estar vacío")
+        
+        poblacion_pais = int(input("Ingrese la poblacion del pais: ").strip())
+        if poblacion_pais <= 0:
+            raise ValueError("No se puede ingresar datos negativos o iguales a 0")
+        
+        superficie_pais = int(input("Ingrese la superficie del pais: ").strip())
+        if superficie_pais <= 0:
+            raise ValueError("No se puede ingresar datos negativos o iguales a 0")
+
+        continente_pais = input("Ingrese el continente donde se encuentra ubicado el pais: ").strip()
+        if not continente_pais:
+            raise ValueError("El continente no puede estar vacío")
+        
+        pais = {
+                    "nombre": nombre_pais,
+                    "poblacion": poblacion_pais,
+                    "superficie": superficie_pais,
+                    "continente": continente_pais
+                    }
+        paises.append(pais)
+        return True
+    
+    except ValueError as e:
+        print(f"Error:{e}")
+        return False
+
     """
     Solicita al usuario los datos de un nuevo país por consola
     y lo agrega a la lista. No se permiten campos vacíos.
