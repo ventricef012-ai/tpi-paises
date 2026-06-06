@@ -11,8 +11,10 @@ CAMPOS = ["nombre", "poblacion", "superficie", "continente"]
 
 
 def cargar_paises(ruta=ARCHIVO_CSV):
+
     """Lee el CSV y devuelve una lista de diccionarios (un país por dict).
     Devuelve lista vacía si el archivo no existe o tiene datos mal formados."""
+
     datos_paises=[]
     try:
         with open(ruta, "r", encoding="utf-8") as archivo:
@@ -37,7 +39,9 @@ def cargar_paises(ruta=ARCHIVO_CSV):
 
 
 def guardar_paises(paises, ruta=ARCHIVO_CSV):
+
     """Escribe la lista de países en el archivo CSV. Sobreescribe el contenido."""
+
     # newline="" evita filas vacías entre registros (importante en Windows)
     try:
         with open(ruta,"w",newline="",encoding="utf-8") as archivo:
@@ -49,10 +53,15 @@ def guardar_paises(paises, ruta=ARCHIVO_CSV):
 
 
 def agregar_pais(paises):
+
+    """Pide los datos de un país por consola, lo valida y lo agrega a la lista.
+    Devuelve True si lo agregó, False si hubo algún error."""
+
     try:
         nombre_pais = input("Ingrese el nombre del pais: ").strip()
         if not nombre_pais:
             raise ValueError("El nombre no puede estar vacío")
+        # Evita duplicados: compara en minúsculas para que "Argentina" y "argentina" cuenten igual
         for pais_existente in paises:
             if nombre_pais.lower() == pais_existente["nombre"].lower():
                 raise ValueError(f"El país '{nombre_pais}' ya existe en la lista")
@@ -75,41 +84,41 @@ def agregar_pais(paises):
                     "superficie": superficie_pais,
                     "continente": continente_pais
                     }
-        paises.append(pais)
+        paises.append(pais) # lo agrega a la lista en memoria; main se encarga de guardar
         return True
     
     except ValueError as e:
         print(f"Error:{e}")
         return False
 
-    """
-    Solicita al usuario los datos de un nuevo país por consola
-    y lo agrega a la lista. No se permiten campos vacíos.
-    Valida que la población y superficie sean números enteros positivos.
-    Valida que el país no exista ya (por nombre, sin distinguir mayúsculas).
-
-    Parámetros:
-        paises (list[dict]): lista actual de países (se modifica en lugar).
-
-    Retorna:
-        bool: True si se agregó correctamente, False si se canceló o hubo error.
-    """
-    # TODO: implementar
-    pass
-
 
 def actualizar_pais(paises):
-    """
-    Solicita el nombre de un país y permite actualizar
-    su población y/o superficie.
-    Muestra los valores actuales antes de pedir los nuevos.
-    Valida que los nuevos valores sean enteros positivos.
 
-    Parámetros:
-        paises (list[dict]): lista actual de países (se modifica en lugar).
+    """Busca un país por nombre y actualiza su población y superficie.
+    Devuelve True si lo actualizó, False si no lo encontró o hubo error."""
 
-    Retorna:
-        bool: True si se actualizó, False si no se encontró el país.
-    """
-    # TODO: implementar
-    pass
+    try:
+        buscar_pais = input("Ingrese el nombre del pais que quiere actualizar: ").strip()
+        for datos_pais in paises:
+            # Búsqueda en minúsculas para no depender de mayúsculas/minúsculas
+            if buscar_pais.lower() == datos_pais["nombre"].lower():
+                print(f"Encontrado! los datos actuales son: \n"
+                f"Poblacion: {datos_pais['poblacion']}\n"
+                f"Superficie: {datos_pais['superficie']}")
+
+                # Validamos los dos valores ANTES de asignar, para no dejar una actualización a medias
+                poblacion_actualizada = int(input("Cual es el nuevo valor de poblacion: ").strip())
+                if poblacion_actualizada <= 0:
+                    raise ValueError("La poblacion no puede ser negativa o igual a 0")
+                superficie_actualizada = int(input("Cual es el nuevo valor de superficie?: ").strip())
+                if superficie_actualizada <= 0:
+                    raise ValueError("La superficie no puede ser negativa o igual a 0")
+
+                datos_pais["poblacion"] = poblacion_actualizada
+                datos_pais["superficie"] = superficie_actualizada
+                return True
+        # Si el for terminó sin encontrar el país, avisa que no existe
+        raise ValueError(f"No se encontró el país '{buscar_pais}'")
+    except ValueError as e:
+        print(f"Error:{e}")
+        return False
