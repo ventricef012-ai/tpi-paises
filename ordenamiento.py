@@ -13,7 +13,7 @@ def ordenar_paises(paises):
         opcion = int(input("Indique el criterio de ordenamiento: \n" \
         "1. Por Nombre \n" \
         "2. Por Poblacion \n" \
-        "3. Por Superficie").strip())
+        "3. Por Superficie \n").strip())
         if opcion == 1:
             campo = "nombre"
         elif opcion == 2:
@@ -27,7 +27,7 @@ def ordenar_paises(paises):
         # .upper() para aceptar 'a' o 'A' indiferentemente
         direccion= input("Ingrese direccion: \n" \
         "A. Ascendente \n" \
-        "D. Descendente").strip().upper()
+        "D. Descendente \n").strip().upper()
         if direccion == "A":
             ascendente = True
         elif direccion == "D":

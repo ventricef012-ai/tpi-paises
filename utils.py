@@ -8,8 +8,8 @@
 def mostrar_pais(pais):
     print(f"  Nombre:      {pais['nombre']}")
     print(f"  Continente:  {pais['continente']}")
-    print(f"  Población:   {pais['poblacion']}".replace(",", "."))       # Función replace para reemplazar las comas por puntos al ejecutar
-    print(f"  Superficie:  {pais['superficie']} km²".replace(",", "."))
+    print(f"  Población:   {pais['poblacion']:,}".replace(",", "."))       # Función replace para reemplazar las comas por puntos al ejecutar
+    print(f"  Superficie:  {pais['superficie']:,} km²".replace(",", "."))
     print("  " + "-" * 24)
 
 
