@@ -110,7 +110,7 @@ def actualizar_pais(paises):
                 poblacion_actualizada = int(input("Cual es el nuevo valor de poblacion: ").strip())
                 if poblacion_actualizada <= 0:
                     raise ValueError("La poblacion no puede ser negativa o igual a 0")
-                superficie_actualizada = int(input("Cual es el nuevo valor de superficie?: ").strip())
+                superficie_actualizada = int(input("Cual es el nuevo valor de superficie: ").strip())
                 if superficie_actualizada <= 0:
                     raise ValueError("La superficie no puede ser negativa o igual a 0")
 
