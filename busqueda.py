@@ -56,35 +56,60 @@ def filtrar_por_continente(paises):
         mostrar_lista_paises(resultados)                                     # Muestra los países del continente consultado 
 
 
-
-
+# Función para filtrar países por población dentro de un rango indicado por el usuario
 def filtrar_por_poblacion(paises):
-    """
-    Solicita un rango mínimo y máximo de población.
-    Retorna los países cuya población esté dentro del rango (inclusive).
-    Valida que los valores sean enteros positivos y que mínimo <= máximo.
+    print("  Ingresá el rango de población a filtrar: ")
 
-    Parámetros:
-        paises (list[dict]): lista de países.
+    try:
+        minimo = int(input("  Población mínima: ").strip())
+        maximo = int(input("  Población máxima: ").strip())
+    except ValueError:                                                       # Valida que se ingrese un entero positivo
+        print("  Solo es posible ingresar números enteros.")
+        return
 
-    Retorna:
-        list[dict]: países dentro del rango de población.
-    """
-    # TODO: implementar
-    pass
+    if minimo < 0 or maximo < 0:                                             # Valida que ninguno de los valores ingresados por usuario sea negativo
+        print("  Solo es posible ingresar números positivos.")
+        return
+
+    if minimo > maximo:                                                      # Valida que la población mínima no supere la población máxima ingresada
+        print("  El mínimo no puede ser mayor que el máximo.")
+
+    resultados = []
+    for pais in paises:
+        if minimo <= pais["poblacion"] <= maximo:                            # Compara los límites ingresados por usuario con la población actual, agrega a resultados[] si cumple la condición
+            resultados.append(pais)
+
+    if not resultados:
+        print(f"  No se encontraron países con rango poblacional entre {minimo:,} y {maximo:,}.".replace(",", "."))
+    else:
+        mostrar_lista_paises(resultados)
 
 
+# Función para filtrar países por superficie dentro de un rango indicado por el usuario (mismo trabajo que función filtrar_por_poblacion)
 def filtrar_por_superficie(paises):
-    """
-    Solicita un rango mínimo y máximo de superficie en km².
-    Retorna los países cuya superficie esté dentro del rango (inclusive).
-    Valida que los valores sean enteros positivos y que mínimo <= máximo.
+    print("  Ingresá el rango de superficie a filtrar (en km²).")
 
-    Parámetros:
-        paises (list[dict]): lista de países.
+    try:
+        minimo = int(input("  Superficie mínima (km²): ").strip())
+        maximo = int(input("  Superficie máxima (km²): ").strip())
+    except ValueError:                                                       # Valida que se ingrese un entero positivo
+        print("  Solo es posible ingresar números enteros.")
+        return
 
-    Retorna:
-        list[dict]: países dentro del rango de superficie.
-    """
-    # TODO: implementar
-    pass
+    if minimo < 0 or maximo < 0:                                             # Valida que ninguno de los valores ingresados por usuario sea negativo
+        print("  Solo es posible ingresar números positivos.")
+        return
+
+    if minimo > maximo:                                                      # Valida que la población mínima no supere la población máxima ingresada
+        print("  El mínimo no puede ser mayor que el máximo.")
+        return
+
+    resultados = []
+    for pais in paises:
+        if minimo <= pais["superficie"] <= maximo:                           # Compara la superficie ingresada por usuario con la superficie de cada país, agrega a resultados[] si cumple la condición
+            resultados.append(pais)
+
+    if not resultados:
+        print(f"  No se encontraron países con superficie entre {minimo:,} y {maximo:,}km².".replace(",", "."))
+    else:
+        mostrar_lista_paises(resultados)
