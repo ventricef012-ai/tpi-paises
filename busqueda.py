@@ -43,7 +43,7 @@ def filtrar_por_continente(paises):
 
     if not continente:                                                       # Valida que no se deje el campo en blanco
         print("  El campo no puede estar vacío.")
-        return
+        return []
     
     resultados = []
     for pais in paises:
@@ -64,14 +64,15 @@ def filtrar_por_poblacion(paises):
         maximo = int(input("  Población máxima: ").strip())
     except ValueError:                                                       # Valida que se ingrese un entero positivo
         print("  Solo es posible ingresar números enteros.")
-        return
+        return []
 
     if minimo < 0 or maximo < 0:                                             # Valida que ninguno de los valores ingresados por usuario sea negativo
         print("  Solo es posible ingresar números positivos.")
-        return
+        return []
 
     if minimo > maximo:                                                      # Valida que la población mínima no supere la población máxima ingresada
         print("  El mínimo no puede ser mayor que el máximo.")
+        return []
 
     resultados = []
     for pais in paises:
@@ -92,15 +93,15 @@ def filtrar_por_superficie(paises):
         maximo = int(input("  Superficie máxima (km²): ").strip())
     except ValueError:                                                       # Valida que se ingrese un entero positivo
         print("  Solo es posible ingresar números enteros.")
-        return
+        return []
 
     if minimo < 0 or maximo < 0:                                             # Valida que ninguno de los valores ingresados por usuario sea negativo
         print("  Solo es posible ingresar números positivos.")
-        return
+        return []
 
     if minimo > maximo:                                                      # Valida que la población mínima no supere la población máxima ingresada
         print("  El mínimo no puede ser mayor que el máximo.")
-        return
+        return []
 
     resultados = []
     for pais in paises:
