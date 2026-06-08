@@ -52,8 +52,7 @@ def filtrar_por_continente(paises):
 
     if not resultados:
         print(f'  No se encontraron países en "{continente}".')              # Si no coincide, imprime mensaje de error
-    else:
-        mostrar_lista_paises(resultados)                                     # Muestra los países del continente consultado 
+    return resultados
 
 
 # Función para filtrar países por población dentro de un rango indicado por el usuario
@@ -81,8 +80,7 @@ def filtrar_por_poblacion(paises):
 
     if not resultados:
         print(f"  No se encontraron países con rango poblacional entre {minimo:,} y {maximo:,}.".replace(",", "."))
-    else:
-        mostrar_lista_paises(resultados)
+    return resultados
 
 
 # Función para filtrar países por superficie dentro de un rango indicado por el usuario (mismo trabajo que función filtrar_por_poblacion)
@@ -111,5 +109,4 @@ def filtrar_por_superficie(paises):
 
     if not resultados:
         print(f"  No se encontraron países con superficie entre {minimo:,} y {maximo:,}km².".replace(",", "."))
-    else:
-        mostrar_lista_paises(resultados)
+    return resultados
