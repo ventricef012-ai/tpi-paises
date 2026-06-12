@@ -120,5 +120,5 @@ tpi-paises/
 ## Links
 
 - 📹 **Video demostrativo:** https://youtu.be/V4lHhQ9NKlU
-- 📄 **Documentación PDF:** [Ver documento](./TPI _Paises(3).pdf)
+- 📄 **Documentación PDF:** [Ver documento](https://docs.google.com/document/d/1WmU190k_7FWe5UHriI9qNp_Xp7j8HZ-M4s4sZcBMTyA/edit?usp=sharing)
 
